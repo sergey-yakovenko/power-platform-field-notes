@@ -69,11 +69,12 @@ small; revisit if row volumes grow enough that the fatter payload becomes the bi
 
 ## The rest of the catalog
 
-- **A parenthesized `;` chain inside a `Switch` or `If` arm compiles clean and silently never
-  runs.** Write single-call arms inside `Switch`/`If`, and chain any follow-up side effects
-  *after* the `Switch`/`If` expression, not inside one of its arms. Unparenthesized `;` chains
-  used as the top-level body of a `Switch`/`If` arm are fine — it's specifically the
-  parenthesized-chain-as-one-arm shape that silently no-ops.
+- **A parenthesized `;` chain inside a `Switch` arm compiles clean and silently never runs**
+  (player-proven). Unparenthesized `;` chains as the top-level body of a `Switch` or `If` arm
+  are player-proven fine — the failure is specific to the parenthesized-chain-as-one-arm shape
+  inside `Switch`. The safe universal shape either way: write single-call arms inside
+  `Switch`/`If`, and chain any follow-up side effects *after* the `Switch`/`If` expression, not
+  inside one of its arms.
 
 - **The blank-record family** — four related traps, all silent:
   - A blank record passed as a record-typed UDF argument kills the calling expression with no
@@ -125,8 +126,7 @@ small; revisit if row volumes grow enough that the fatter payload becomes the bi
   differently) or any enable-guard reading the input's value only reacts after the field loses
   focus, not as the user types.
 
-- **`CountRows(gallery.AllItems)` is expensive/unreliable for a running count** — use
-  `gallery.AllItemsCount` instead.
+- **Use `gallery.AllItemsCount` instead of `CountRows(gallery.AllItems)`** for a running count.
 
 - **`ButtonAppearance.Transparent` renders as a visible white pill in the player**, not an
   invisible hit target and not a link-styled button. For an invisible tap target or a
@@ -144,7 +144,7 @@ small; revisit if row volumes grow enough that the fatter payload becomes the bi
 - **UDF and type constraints:**
   - `Type(RecordOf(MyTable))` excludes rollup columns from the record type — adding a rollup
     to a table breaks every record-typed UDF parameter over that table. Convert the parameter
-    to a GUID and re-look-up inside the UDF instead of accepting the record directly.
+    to a GUID.
   - A UDF cannot return `Type(RecordOf(X))` when X has an N:N relationship column — the actual
     returned record carries an extra field the declared type doesn't have, and it must be a
     strict subset. Return a scalar instead.

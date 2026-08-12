@@ -31,10 +31,11 @@ Example manifest shape for a dataset's bound property-sets:
 `bound   true` on a required column-binding property-set means it is `required="true"` in the
 manifest and must be supplied even if a public control-facing doc lists fewer required fields —
 the manifest is authoritative for *this installed version*, and a doc page can describe a newer
-release than what's actually deployed. Check `ColCellType`-style enumerated properties against
-the manifest's own accepted member list too — a plausible-looking string that isn't an actual
-enum member (e.g. a generic "text" cell type when the real member set is a fixed short list) is
-silently accepted or rejected depending on the property, so verify rather than assume.
+release than what's actually deployed. Check enumerated cell-type-style properties against the
+manifest's own accepted member list too: one observed set (`ColCellType`) accepts exactly
+`expand · tag · image · indicatortag · clickableimage · link` — `"text"` is **not** a member;
+leave the property `""` for an ordinary cell rather than typing a plausible-looking value that
+isn't actually in the enum.
 
 ## Dataset binding rules, assembled from repeated failures
 

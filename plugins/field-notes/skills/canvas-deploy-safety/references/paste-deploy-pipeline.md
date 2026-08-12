@@ -73,13 +73,14 @@ is visually destroyed.
   never from synced YAML alone; repair by re-asserting the correct value through the formula bar.
   A fluid, auto-sizing layout with no fixed position values to begin with is immune to this class
   of drift by construction.
-- **A paste drops container-alignment properties on group/container controls** (this property
+- **A paste drops `AlignInContainer` on group/container controls** (this property
   tends to survive on simple text controls, just not containers). A properties-pane edit to the
-  same setting persists correctly where a paste of it does not — but watch for a same-named-looking
-  control near the top of the pane that actually controls a *different*, related layout property;
-  they're easy to confuse. When the alignment property won't serialize through any paste route,
-  stop fighting it and give the child an explicit width instead. The synced-down YAML is
-  unreliable in **both directions** about whether this property is actually present.
+  same setting persists correctly where a paste of it does not — but watch for the pane's visible
+  "Stretch" radio near the top: that control is **Align items (`LayoutAlignItems`)**, a different,
+  related property, not `AlignInContainer` — don't mistake setting one for having set the other.
+  When `AlignInContainer` won't serialize through any paste route, stop fighting it and give the
+  child an explicit width instead. The synced-down YAML is unreliable in **both directions** about
+  whether this property is actually present.
 - **A component instance's width cannot be reliably landed in the serialized document by any
   paste or formula-bar route** — not via a direct formula write, not via a paste under any
   alignment mode, not via a fresh re-paste; there is also no properties-pane field for it in some

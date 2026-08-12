@@ -75,7 +75,7 @@ the right trade once you've hit the expand poisoning, not a downgrade to avoid.
 enforcing nothing at all — it activates asynchronously and can sit `Pending` for on the order of
 50 seconds before `Active`.** Always poll status to `Active` before relying on the key for
 uniqueness; testing against a `Pending` key will make it look broken (duplicates get through) when
-it just hasn't finished activating.
+it just hasn't finished activating. `(observed 10 Aug 2026)`
 
 **Separately: any alternate key stops enforcing uniqueness the instant one of its key columns is
 null.** Treat this as something to deliberately decide about, not just discover:
@@ -120,4 +120,4 @@ needs directory-read permission on top of table access.
 **Writing to a lookup that targets the virtual table works app-only, even though reading from it
 doesn't** — a service-principal `@odata.bind` PATCH to set the lookup succeeded in testing. Only
 the *read* side is gated to delegated user tokens; don't assume the write side needs the same
-elevation.
+elevation. `(observed 10 Aug 2026)`

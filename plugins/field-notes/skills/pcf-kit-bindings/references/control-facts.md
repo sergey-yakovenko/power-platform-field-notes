@@ -55,10 +55,12 @@ from a previous engagement:**
 
 **Property names:** live introspection tooling wins, because published docs describe the
 *current* generation of modern controls while a given environment can be running a materially
-older one. Observed disagreement: docs described a renamed/removed property set (one property
-renamed, another renamed, a third removed outright) that a live environment's tooling reported as
-still using the *old* names/set entirely present — and a real compile settled it by rejecting the
-documented new name and accepting the old one.
+older one. Observed disagreement, one control generation: docs claimed a `Text` control's
+`FontColor` had been renamed `Color`, `FontSize` renamed `Size`, and `AcceptsFocus` removed
+outright — while that environment's live introspection tooling reported `FontColor`, `FontSize`
+and `AcceptsFocus` all still present under their old names. A real compile settled it: `Color`
+was **rejected**, `FontColor` was **accepted** — the environment was running the older property
+set the docs described as already gone.
 
 **Enum accessors:** documentation wins, even when live introspection tooling disagrees. A
 control-introspection tool's own "enum name" field is frequently an *internal* type name and is

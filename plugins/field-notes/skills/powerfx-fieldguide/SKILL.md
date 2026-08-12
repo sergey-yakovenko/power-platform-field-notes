@@ -1,7 +1,7 @@
 ---
 name: powerfx-fieldguide
 version: 0.1.0
-description: Power Fx correctness rules that no static checker enforces - runtime bombs, the only working error-handling shape for writes, and delegation as schema design. USE WHEN writing or reviewing Power Fx formulas, Patch/Remove/write logic, IfError handling, choice-column comparisons, App.Formulas / named formulas / UDFs, or when chasing delegation warnings or values that render blank at runtime. DO NOT USE WHEN the question is about control properties or PCF bindings (use pcf-kit-bindings) or about deploying YAML (use canvas-deploy-safety).
+description: Power Fx correctness rules that no static checker enforces - runtime bombs, the only working error-handling shape for writes, and delegation as schema design. USE WHEN writing or reviewing Power Fx formulas, Patch/Remove/write logic, IfError handling, a save that shows a success toast but doesn't persist (a false-success toast), choice-column comparisons, App.Formulas / named formulas / UDFs, or when chasing delegation warnings or values that render blank at runtime. DO NOT USE WHEN the question is about control properties or PCF bindings (use pcf-kit-bindings) or about deploying YAML (use canvas-deploy-safety).
 author: Sergey Yakovenko
 ---
 
@@ -40,8 +40,8 @@ The full catalog, with symptoms, fixes and evidence dates, is in
   three shapes that look reasonable are broken. See `references/write-patterns.md`.
 
 Also in the catalog: a create-Patch that includes a status/state field silently no-ops the
-*entire* Patch; a parenthesized `;` chain inside a `Switch`/`If` arm compiles clean and
-silently never runs; the blank-record family (a blank record passed as a record-typed UDF
+*entire* Patch; a parenthesized `;` chain inside a `Switch` arm compiles clean and
+silently never runs (unparenthesized chains in Switch/If arms are fine); the blank-record family (a blank record passed as a record-typed UDF
 argument, a PK read off a not-yet-clicked selection, `IsBlank()` vs `= Blank()` on a lookup);
 `[@'Name']` shadowing when a choice and a column share a display name; and grid-cell /
 `ItemDisplayText` formulas running a restricted function whitelist that silently renders blank

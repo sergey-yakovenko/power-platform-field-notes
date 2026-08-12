@@ -123,7 +123,11 @@ certain of, do not trust the result either way. Sync down and run a **structural
 and elides anything equal to a default. If you find a mutilated tree (control structure intact,
 but properties like text, fill, item bindings or event handlers dropped), repair by pasting the
 whole affected screen fresh from your authored source, per `paste-deploy-pipeline.md` — this
-repair path does not depend on the coauthoring session being paired at all.
+repair path does not depend on the coauthoring session being paired at all. A live, correctly
+paired session is not by itself a guarantee the merge left the screen intact either — see the
+merge-semantics section of `SKILL.md`: even a property-only merge, with zero children added or
+removed, has scrambled a screen's rendering. Reload and verify rendering after any content-carrying
+compile, not only after a session you suspected of being dead.
 
 Separately, note that `sync_canvas` (the read path) has its **own**, different Studio-gating
 condition: it needs the connect call to have happened *while Studio already had the app open*.

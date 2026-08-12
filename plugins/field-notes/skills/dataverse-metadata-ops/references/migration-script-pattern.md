@@ -94,4 +94,4 @@ cause is corrupted ReadyToRun precompiled images; forcing the runtime to JIT ins
 (`DOTNET_ReadyToRun=0`) resolved it completely across several hundred subsequent calls with zero
 failures. Set this in every migration script's subprocess environment rather than relying on it
 being set globally in the shell, so the scripts keep working regardless of who runs them or from
-where.
+where. `(root-caused 6 Aug 2026)`
