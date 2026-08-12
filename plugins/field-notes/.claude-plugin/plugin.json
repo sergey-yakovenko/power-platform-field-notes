@@ -1,0 +1,16 @@
+{
+  "name": "field-notes",
+  "version": "0.1.0",
+  "description": "Field-tested rules for canvas authoring safety, Power Fx correctness, PCF/Creator Kit bindings, and Dataverse metadata operations.",
+  "author": {
+    "name": "Sergey Yakovenko"
+  },
+  "license": "MIT",
+  "keywords": [
+    "power-platform",
+    "canvas-apps",
+    "dataverse",
+    "power-fx",
+    "creator-kit"
+  ]
+}

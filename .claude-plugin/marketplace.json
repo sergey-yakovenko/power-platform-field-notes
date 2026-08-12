@@ -1,0 +1,16 @@
+{
+    "name": "power-platform-field-notes",
+    "owner": {
+        "name": "Sergey Yakovenko"
+    },
+    "metadata": {
+        "description": "Field-tested corrections and hard-won rules for Power Platform / Dataverse / Canvas App development. Extends the stock canvas-apps and dataverse plugins.",
+        "pluginRoot": "."
+    },
+    "plugins": [
+        {
+            "name": "field-notes",
+            "source": "./plugins/field-notes"
+        }
+    ]
+}
