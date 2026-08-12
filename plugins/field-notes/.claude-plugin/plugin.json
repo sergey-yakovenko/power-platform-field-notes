@@ -6,6 +6,8 @@
     "name": "Sergey Yakovenko"
   },
   "license": "MIT",
+  "homepage": "https://github.com/sergey-yakovenko/power-platform-field-notes",
+  "repository": "https://github.com/sergey-yakovenko/power-platform-field-notes",
   "keywords": [
     "power-platform",
     "canvas-apps",

@@ -64,8 +64,11 @@ argument cleanly, and calling `Value()` inside the filter predicate itself block
 `'Status Column' = MyChoice.Approved` — which compiles to a native equality filter on the
 stored integer server-side. Because a choice can't be passed as a UDF parameter, this means
 **one function per status value** (`RowsApproved(t)`, `RowsRejected(t)`, ...) rather than one
-parameterized function. `Value()` is fine to call on an already-fetched record outside a filter
-predicate — the restriction is specifically on predicates that need to delegate.
+parameterized function. `Value()` on an already-fetched **non-choice** value is fine outside a
+filter predicate — the delegation restriction is specifically on predicates that need to
+delegate. But never call `Value()` on a choice at all, anywhere that will actually execute:
+`Value(<choice>)` fails at runtime everywhere, even on a member constant — see
+`runtime-bombs.md`, the lead bomb.
 
 Also: pull any UDF call *outside* the predicate you're filtering with (`With({x: SomeUdf(...)},
 Filter(t, ... x ...))` rather than calling the UDF inside the `Filter` condition), and sort on a

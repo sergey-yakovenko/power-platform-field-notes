@@ -18,9 +18,18 @@ to hand to the next step.
 
 ## 1. Locate sources and the last harvest marker
 
-The field-notes repo is the directory this skill lives in, two levels up from
-`skills/pp-harvest/` (i.e. `skills/pp-harvest/../../..`, the repo root containing
-`plugins/`, `scripts/`, and `HARVEST-LOG.md`).
+The harvest target is the field-notes **source checkout** — the git repo containing
+`plugins/`, `scripts/check.sh`, and `HARVEST-LOG.md` at its root (on this machine,
+`~/Development/power-platform-field-notes`). This is *not* simply "a few levels up" from this
+skill: the source layout is `plugins/field-notes/skills/pp-harvest/`, so the repo root is four
+levels up (`skills/pp-harvest/../../../..`) from a source checkout — but an **installed
+plugin-cache copy has no marketplace root at all**, since the cache only copies the plugin
+directory (`plugins/field-notes/`) and that copy is overwritten on every update. Never write to
+a plugin-cache location.
+
+If this skill is running from an installed plugin cache, or the checkout location is otherwise
+unknown, **ask the user for the checkout path before proceeding** rather than guessing a
+relative-path depth.
 
 Read `HARVEST-LOG.md` at that repo root. Find the row (if any) for the working project — the
 project whose lessons are being harvested, identified by name or path. That row's "up to commit"

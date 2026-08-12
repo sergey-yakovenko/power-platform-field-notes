@@ -70,8 +70,11 @@ no-ops that only *look* like non-writes.
 Operational rules that follow from this:
 
 - **Never compile new content against a session you haven't confirmed is live.** Probe pairing
-  first with a byte-identical (no-op) sync-and-compile before sending anything that actually
-  changes — see the pairing-protocol reference for why even that probe has limits.
+  first with a harmless, **content-carrying** compile — a byte-identical (no-op) compile can
+  never confirm liveness, because the service only performs the designer-session lookup when the
+  payload differs from what's already stored, so a no-op probe always answers "live" regardless
+  of whether a session is actually registered. See the pairing-protocol reference for the full
+  null-test trap and escalation ladder.
 - **After any dead-session compile that carried new content, sync and run a structural property
   diff** (names *and* values, not a text diff — the server reorders properties and elides
   defaults) before trusting anything about the resulting app state.

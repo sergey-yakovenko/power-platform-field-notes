@@ -20,8 +20,11 @@ runtime.
 **1. `UpdateContext`-wrapped Patch.**
 
 ```
-UpdateContext({v: Patch(MyTable, Defaults(MyTable), {...})});
-IfError(..., Notify("Saved"), Notify("Save failed"))
+IfError(
+    UpdateContext({locResult: Patch(MyTable, Defaults(MyTable), {...})}),
+    Notify("Save failed")   // never reached: the Patch error is swallowed inside UpdateContext
+);
+Notify("Saved")             // fires even when the Patch failed — the phantom success toast
 ```
 
 A `Patch` failing *inside* an `UpdateContext({...})` call never reaches an `IfError` wrapped
